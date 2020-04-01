@@ -4,8 +4,6 @@ namespace Konsulting\EloquentAssertions\Tests;
 
 use Konsulting\EloquentAssertions\EloquentAssertions;
 use Konsulting\EloquentAssertions\Tests\Stubs\Book;
-use PHPUnit\Framework\ExpectationFailedException;
-use PHPUnit\Framework\TestCase;
 
 class EloquentAssertionsTest extends TestCase
 {
@@ -27,17 +25,8 @@ class EloquentAssertionsTest extends TestCase
         $book1 = new Book(['id' => 1]);
         $book2 = new Book(['id' => 2]);
 
-        $this->checkConstraintFails(fn() => $this->assertSameModel($book1, $book2));
-    }
-
-    protected function checkConstraintFails(callable $constraint)
-    {
-        try {
-            $constraint();
-        } catch (ExpectationFailedException $e) {
-            return;
-        }
-
-        $this->fail('Constraint did not fail.');
+        $this->checkExpectationFails(
+            fn() => $this->assertSameModel($book1, $book2)
+        );
     }
 }
