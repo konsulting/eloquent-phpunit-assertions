@@ -1,0 +1,14 @@
+{
+  "name": "konsulting/eloquent-phpunit-assertions",
+  "authors": [
+    {
+      "name": "Robin D'Arcy",
+      "email": "robin@klever.co.uk"
+    }
+  ],
+  "require": {
+    "php": ">=7.1",
+    "phpunit/phpunit": ">=8.0",
+    "illuminate/database": ">=5.6"
+  }
+}
