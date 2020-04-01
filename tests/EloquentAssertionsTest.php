@@ -3,6 +3,7 @@
 namespace Konsulting\EloquentAssertions\Tests;
 
 use Konsulting\EloquentAssertions\EloquentAssertions;
+use Konsulting\EloquentAssertions\Tests\Stubs\Author;
 use Konsulting\EloquentAssertions\Tests\Stubs\Book;
 
 class EloquentAssertionsTest extends TestCase
@@ -27,6 +28,17 @@ class EloquentAssertionsTest extends TestCase
 
         $this->checkExpectationFails(
             fn() => $this->assertSameModel($book1, $book2)
+        );
+    }
+
+    /** @test */
+    public function it_fails_if_two_models_are_of_different_types()
+    {
+        $book = new Book(['id' => 1]);
+        $author = new Author(['id' => 1]);
+
+        $this->checkExpectationFails(
+            fn() => $this->assertSameModel($book, $author)
         );
     }
 }
