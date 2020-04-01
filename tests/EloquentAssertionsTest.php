@@ -41,4 +41,18 @@ class EloquentAssertionsTest extends TestCase
             fn() => $this->assertSameModel($book, $author)
         );
     }
+
+    /** @test */
+    public function it_checks_if_a_model_has_soft_deletes()
+    {
+        $this->assertHasSoftDeletes(Author::class);
+        $this->assertHasSoftDeletes(new Author);
+
+        $this->checkExpectationFails(
+            fn() => $this->assertHasSoftDeletes(Book::class)
+        );
+        $this->checkExpectationFails(
+            fn() => $this->assertHasSoftDeletes(new Book)
+        );
+    }
 }

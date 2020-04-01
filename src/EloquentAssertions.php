@@ -4,6 +4,7 @@ namespace Konsulting\EloquentAssertions;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Trait EloquentAssertions
@@ -51,5 +52,15 @@ trait EloquentAssertions
             $actual->map($getClass)->toArray(),
             'The collections contain objects of different classes.'
         );
+    }
+
+    /**
+     * Assert that the class uses the soft deletes trait.
+     *
+     * @param string|object $class
+     */
+    protected function assertHasSoftDeletes($class)
+    {
+        $this->assertContains(SoftDeletes::class, class_uses($class));
     }
 }
